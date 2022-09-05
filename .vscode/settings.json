@@ -1,0 +1,23 @@
+{
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter-notebook",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "files.associations": {
+    "iostream": "cpp",
+    "cstdlib": "cpp",
+    "numeric": "cpp",
+    "*.tcc": "cpp",
+    "vector": "cpp",
+    "cmath": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "ostream": "cpp",
+    "bitset": "cpp"
+  },
+  "code-runner.saveAllFilesBeforeRun": true,
+  "code-runner.runInTerminal": true,
+  "code-runner.preserveFocus": false
+}
