@@ -4,10 +4,11 @@ using namespace std;
 class Student
 {
     string name;
-    int roll, marks;
+    int roll;
+    float marks;
 
 public:
-    void setData(string n, int r, int m)
+    void setData(string n, int r, float m)
     {
         name = n;
         roll = r;
@@ -19,20 +20,23 @@ public:
         cout << name << " " << roll << " " << marks << endl;
     }
 
-    vector<int> linearSearch(Student s[], int key, int n)
+    int linearSearch(Student s[], float key, int n)
     {   
-        vector<int>v;
+        int ans = 0;
         for (int i = 0; i < n; i++)
         {
-            if (s[i].marks == key)
-                v.push_back(i);
+            if (s[i].marks == key){
+                s[i].display();
+                cout<<"Element found at : "<<i<<endl;
+                ans=1;
+            }
         }
-        return v;
+        return ans;
     }
 
     int binarySearch(Student s[], string p, int n)
     {
-        s[0].bubbleSort(s,n);
+        s[0].insertionSort(s,n);
         int low = 0, high = n - 1;
 
         while (low <= high)
@@ -57,7 +61,7 @@ public:
         {
             for (int j = 0; j < n - i - 1; j++)
             {
-                if (s[j].name > s[j + 1].name)
+                if (s[j].roll > s[j + 1].roll)
                 {
                     swap(s[j], s[j + 1]);
                 }
@@ -70,15 +74,43 @@ public:
         for (int i = 1; i < n; i++)
         {
             int j = i - 1;
-            int key = s[i].marks;
+            string key = s[i].name;
 
-            while (j >= 0 and key < s[j].marks)
+            while (j >= 0 and key < s[j].name)
             {
                 swap(s[j + 1], s[j]);
                 j--;
             }
         }
     }
+
+    int partition(Student s[], int low, int high)
+    {
+        int i = low;
+        int j = high;
+        float pivot = s[low].marks;
+        while (i < j)
+        {
+            while (pivot <= s[i].marks) i++;
+            while (pivot > s[j].marks) j--;
+
+            if (i < j)
+                swap(s[i], s[j]);
+        }
+        swap(s[low], s[j]);
+        return j;
+    }
+
+    void quickSort(Student s[], int low, int high)
+    {
+    if (low < high)
+        {
+            int pivot = partition(s, low, high);
+            quickSort(s, low, pivot - 1);
+            quickSort(s, pivot + 1, high);
+        }
+    }
+
 };
 
 int main()
@@ -88,12 +120,12 @@ int main()
     int n;
     cin >> n;
     Student s[n];
-    Student search;
+    Student _;
 
     int cont;
     do
     {
-        cout << "1 - Enter Data \n2 - Display Data \n3 - LInear Search \n4 - Binary Search \n5 - Bubble Sort \n6 - Insertion Sort\n";
+        cout << "1 - Enter Data \n2 - Display Data \n3 - Linear Search \n4 - Binary Search \n5 - Bubble Sort \n6 - Insertion Sort\n7 - Quick Sort\n";
 
         int x;
         cout << "Enter your choice : ";
@@ -102,12 +134,13 @@ int main()
         if (x == 1)
         { // Taking user Input
             string name;
-            int roll, marks;
+            int roll;
+            float marks;
             for (int i = 0; i < n; i++)
             {
-                cout<<"Enter name :";cin >> name;
-                cout<<"Enter roll :";cin >> roll;
-                cout<<"Enter marks :";cin >> marks;
+                cin >> name;
+                cin >> roll;
+                cin >> marks;
 
                 s[i].setData(name, roll, marks);
             }
@@ -124,20 +157,15 @@ int main()
         else if (x == 3)
         {
             //SGPA linear search
-            int key;
+            float key;
             cout << "Enter marks : ";
             cin >> key;
 
-            vector<int> pos = search.linearSearch(s, key, n);
-
-            if (pos.size() == 0)
+            int pos = _.linearSearch(s, key, n);
+            if (pos == 0)
             {
                 cout << "NOT_FOUND\n";
             }
-            else
-                cout << "Element found at : ";
-                for(auto x : pos)cout<<x<<" ";
-                cout<<"\n";
         }
 
         //record by name binary search
@@ -146,7 +174,7 @@ int main()
             string nam;
             cout << "Enter name : ";
             cin >> nam;
-            int posName = search.binarySearch(s, nam, n);
+            int posName = _.binarySearch(s, nam, n);
             if (posName == -1)
             {
                 cout << "NAME_NOT_FOUND\n";
@@ -158,14 +186,25 @@ int main()
         else if (x == 5)
         {
             //Sort by roll No
-            search.bubbleSort(s, n);
+            _.bubbleSort(s, n);
         }
         else if (x == 6)
         {
-            //Sort by roll No
-            search.insertionSort(s, n);
+            //Sort by name
+            _.insertionSort(s, n);
         }
-
+        else if(x == 7){
+            //qickSort on sgpa
+            _.quickSort(s,0,n-1);
+            int k;
+            cout<<"Number of top students : ";cin>>k;
+            for (int i = 0; i < min(n,k); i++)
+            {
+                cout<<"Rank "<<i+1<<" : ";
+                s[i].display();
+            }
+            
+        }
         cout << "Press 1 to continue : ";
         cin >> cont;
     } while (cont == 1);
@@ -173,16 +212,11 @@ int main()
     return 0;
 }
 
-// 4
-// Jasskaran 20 8
-// Ankit 12 9
-// Soumyadip 50 10
-// Ritik 42 4
 
-// 6
-// a 1 2
-// d 4 5
-// f 6 7
-// b 2 3
-// e 5 6
-// c 3 4
+// AA 8 89.3
+// AAA 3 82.3
+// AB 10 89.3
+// BA 7 82.3
+// AAAA 12 89.3
+// BAA 1 87
+// BAB 2 83

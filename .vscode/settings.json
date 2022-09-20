@@ -15,7 +15,9 @@
     "deque": "cpp",
     "string": "cpp",
     "ostream": "cpp",
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "type_traits": "cpp",
+    "thread": "cpp"
   },
   "code-runner.saveAllFilesBeforeRun": true,
   "code-runner.runInTerminal": true,

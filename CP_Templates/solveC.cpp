@@ -1,78 +1,59 @@
-//Code is like humour , when you have to explain it its bad
+// Code is like humour. When you have to explain it, it’s bad. //
 
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long 
+
+#define fast ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define int long long int
 #define all(v) v.begin(),v.end()
+template <class T> void coutfs(T x){for(auto i : x){cout<<i.first<<" "<<i.second<<endl;}}
 
-int n,m;
-
-
-vector <vector<int>> connectedCompnents;
-vector<int> curr;
-
-map<int,set<int>> graph;
-
-void dfs(int vertex , bool vis[]){
-    //after entering the vertex
-    vis[vertex]=1;
-    curr.push_back(vertex);
-    //if(vis[vertex]) return;
-
-    for(int child : graph[vertex]){
-        
-        //before entering the child
-        if(vis[child])continue;
-        dfs(child,vis);
-       
-        //after exiting ther child node 
-    }
-    //before exiting the vertex
-}
-
+const int M = 1e9+7,N=1e6;
 
 signed main()
-{   
-    int t=1;//cin>>t;
-    while(t--){
-        
-        cin>>n>>m;
-        bool vis[n]={0};
+{
+    fast
+    int T = 1;
+    cin >> T;
+    while (T--)
+    {
+        int n;cin>>n;
+        map<int,int> pos;
+        vector<pair<string,int>> a(n);
+        vector<pair<int,int>> b(n);
 
-        for (int i = 1; i <= n; i++)
+        for(int i= 0 ; i < n ;i++){
+            
+            cin>>a[i].first;
+            cin>>b[i].first;
+
+            int id;
+            cin>>id;
+            pos[id]=i;
+            a[i].second = id;
+            b[i].second = id;
+        }
+
+        sort(all(a));
+        sort(all(b));
+
+        // coutfs(a);
+        // cout<<endl;
+        // coutfs(b);
+        // cout<<endl;
+        // coutfs(pos);
+
+        int ans = 0;
+
+        for (int i = 0; i < n; i++)
         {
-            graph[i]={i};
+           if(a[i].second == b[i].second and pos[a[i].second]==i){
+               ans++;
+            //    cout<<i;
+           }
         }
-    
-        for(int i = 0 ; i < m; i++){
-            int x;cin>>x;
-            set<int> v;
+        cout<<ans<<endl;
+        
 
-            for(int j =0 ; j < x;j++){
-                int a;cin>>a;
-                v.insert(a);
-            }
-
-            for(auto x : v){
-                graph[x].insert(all(v));
-            }
-        }
-        for(int i = 1 ; i <= n; i++){
-            if(vis[i]) continue;
-            dfs(i,vis);
-            connectedCompnents.push_back(curr);
-            curr.clear();
-        }
-
-        vector<int>ans(n+1,0);
-        for(auto i : connectedCompnents){
-            for(auto j : i){
-                ans[j]=i.size();
-            }
-        }
-
-        for(int i=1;i<=n;i++){
-            cout<<ans[i]<<" ";
-        }
-    }       
+    }
 }

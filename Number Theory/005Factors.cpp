@@ -10,10 +10,12 @@ int factors(int n){
     for(int i = 1 ; i *i <= n;i++){
           if(n%i==0){ct++;
           sum+=i;
-          cout<<i<<' ';}
+          cout<<i<<' ';
           if(n/i!=i){
               cout<<n/i<<" ";
               ct++;sum+=n/i;}
+          }
+          
     }
     return ct /*, sum */;
 }
