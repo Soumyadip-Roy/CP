@@ -6,6 +6,7 @@
     }
   ],
   "files.associations": {
+    "*.ejs": "html",
     "iostream": "cpp",
     "cstdlib": "cpp",
     "numeric": "cpp",
@@ -17,7 +18,24 @@
     "ostream": "cpp",
     "bitset": "cpp",
     "type_traits": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "array": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "initializer_list": "cpp",
+    "regex": "cpp",
+    "valarray": "cpp",
+    "chrono": "cpp",
+    "functional": "cpp",
+    "ratio": "cpp",
+    "streambuf": "cpp",
+    "new": "cpp",
+    "complex": "cpp",
+    "sstream": "cpp",
+    "iomanip": "cpp",
+    "utility": "cpp"
   },
   "code-runner.saveAllFilesBeforeRun": true,
   "code-runner.runInTerminal": true,
