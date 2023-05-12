@@ -19,7 +19,7 @@ class segTree{
             int mid = (low + high) / 2;
             build(2 * ind + 1, low, mid, a);
             build(2 * ind + 2, mid + 1, high, a);
-            //operation that is to be performed on children nodes to get the value of parent node
+            
             seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
         }
 
@@ -53,7 +53,8 @@ class segTree{
             if (i <= mid)
                 update(2 * ind + 1, low, mid, i, val);
             else
-                update(2 * ind + 2, low, mid, i, val);
+                update(2 * ind + 2, mid+1, high, i, val);
+
             seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
         }
 };
